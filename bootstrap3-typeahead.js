@@ -113,9 +113,11 @@
   , process: function (items) {
       var that = this
 
-      items = $.grep(items, function (item) {
-        return that.matcher(item)
-      })
+      if (this.options.filter) {
+      	items = $.grep(items, function (item) {
+          return that.matcher(item)
+        })
+      }	
 
       items = this.sorter(items)
 
@@ -363,6 +365,7 @@
   , minLength: 1
   , scrollHeight: 0
   , autoSelect: true
+  , filter: true // set to false to display all items in source (when filtering from outside)
   }
 
   $.fn.typeahead.Constructor = Typeahead
